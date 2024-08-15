@@ -1,19 +1,16 @@
 import {
-  Controller,
-  Get,
-  Post,
   Body,
-  Patch,
-  Param,
+  Controller,
   Delete,
-  UseGuards,
+  Get,
+  Param,
+  Patch,
+  Post,
   Query,
   Req,
-  Logger,
+  UseGuards,
 } from '@nestjs/common';
-import { FuelExpensesService } from './fuel-expenses.service';
-import { CreateFuelExpenseDto } from './dto/create-fuel-expense.dto';
-import { UpdateFuelExpenseDto } from './dto/update-fuel-expense.dto';
+import { AuthGuard } from '@nestjs/passport';
 import {
   ApiBearerAuth,
   ApiCreatedResponse,
@@ -21,14 +18,16 @@ import {
   ApiParam,
   ApiTags,
 } from '@nestjs/swagger';
-import { FuelExpense } from './domain/fuel-expense';
-import { AuthGuard } from '@nestjs/passport';
 import {
   InfinityPaginationResponse,
   InfinityPaginationResponseDto,
 } from '../utils/dto/infinity-pagination-response.dto';
 import { infinityPagination } from '../utils/infinity-pagination';
+import { FuelExpense } from './domain/fuel-expense';
+import { CreateFuelExpenseDto } from './dto/create-fuel-expense.dto';
 import { FindAllFuelExpensesDto } from './dto/find-all-fuel-expenses.dto';
+import { UpdateFuelExpenseDto } from './dto/update-fuel-expense.dto';
+import { FuelExpensesService } from './fuel-expenses.service';
 
 @ApiTags('Fuelexpenses')
 @ApiBearerAuth()
@@ -45,7 +44,6 @@ export class FuelExpensesController {
     type: FuelExpense,
   })
   create(@Body() createFuelExpenseDto: CreateFuelExpenseDto, @Req() req: any) {
-    Logger.log('req.user', req.user);
     return this.fuelExpensesService.create(createFuelExpenseDto, req.user.id);
   }
 

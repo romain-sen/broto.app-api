@@ -1,5 +1,30 @@
 {
   "markdown.extension.toc.levels": "2..6",
   "markdown.extension.orderedList.autoRenumber": false,
-  "typescript.preferences.importModuleSpecifier": "relative"
+  "files.eol": "\n",
+  "javascript.preferences.importModuleSpecifier": "relative",
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "prettier.endOfLine": "lf",
+  "conventionalCommits.scopes": [
+    "src",
+    "prisma",
+    "test",
+    "config",
+    "modules",
+    "shared",
+    "types",
+    "docs"
+  ],
+  "conventionalCommits.promptBody": false,
+  "conventionalCommits.promptFooter": false,
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  },
+  "files.insertFinalNewline": true
 }
