@@ -31,8 +31,14 @@ const infrastructureDatabaseModule = TypeOrmModule.forRootAsync({
   },
 });
 
+import { FuelExpensesModule } from './fuel-expenses/fuel-expenses.module';
+
+import { VehiculesModule } from './vehicules/vehicules.module';
+
 @Module({
   imports: [
+    VehiculesModule,
+    FuelExpensesModule,
     ConfigModule.forRoot({
       isGlobal: true,
       load: [

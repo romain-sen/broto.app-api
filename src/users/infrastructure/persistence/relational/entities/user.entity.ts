@@ -10,6 +10,8 @@ import {
   UpdateDateColumn,
   JoinColumn,
   OneToOne,
+  ManyToMany,
+  OneToMany,
 } from 'typeorm';
 import { RoleEntity } from '../../../../../roles/infrastructure/persistence/relational/entities/role.entity';
 import { StatusEntity } from '../../../../../statuses/infrastructure/persistence/relational/entities/status.entity';
@@ -23,6 +25,8 @@ import { EntityRelationalHelper } from '../../../../../utils/relational-entity-h
 // in your project and return an ORM entity directly in response.
 import { Exclude, Expose } from 'class-transformer';
 import { ApiProperty } from '@nestjs/swagger';
+import { VehiculeEntity } from '../../../../../vehicules/infrastructure/persistence/relational/entities/vehicule.entity';
+import { FuelExpenseEntity } from '../../../../../fuel-expenses/infrastructure/persistence/relational/entities/fuel-expense.entity';
 
 @Entity({
   name: 'user',
@@ -113,6 +117,18 @@ export class UserEntity extends EntityRelationalHelper {
     eager: true,
   })
   status?: StatusEntity;
+
+  @ApiProperty({
+    type: () => VehiculeEntity,
+  })
+  @ManyToMany(() => VehiculeEntity, (vehicule) => vehicule.users)
+  vehicules: VehiculeEntity[];
+
+  @ApiProperty({
+    type: () => FuelExpenseEntity,
+  })
+  @OneToMany(() => FuelExpenseEntity, (fuelExpense) => fuelExpense.user)
+  fuelExpenses: FuelExpenseEntity[];
 
   @ApiProperty()
   @CreateDateColumn()
